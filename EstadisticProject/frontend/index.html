@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analizador S&P 500 - Dashboard Estadístico</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Analizador Estadístico S&P 500</h1>
+            <div class="subtitle">Consulta en tiempo real cualquier empresa del índice</div>
+            
+            <div class="search-container">
+                <div class="input-group">
+                    <label for="ticker-select">Selecciona una empresa:</label>
+                    <select id="ticker-select" class="ticker-selector">
+                        <option value="" disabled selected>-- Cargando empresas --</option>
+                    </select>
+                </div>
+                <button id="search-btn" class="primary-btn">Analizar</button>
+                
+                <div class="input-group probability-input">
+                    <label for="rentabilidad-input">¿Qué rentabilidad esperas? (%)</label>
+                    <input type="number" id="rentabilidad-input" placeholder="Ej: 1.5 (para 1.5%)" step="0.1">
+                    <button id="calc-prob-btn" class="secondary-btn">Calcular Probabilidad</button>
+                </div>
+            </div>
+            
+            <div id="error-display" class="error-message"></div>
+        </header>
+
+        <main id="results-container" style="display: none;">
+            <section class="company-header">
+                <h2 id="company-name"></h2>
+                <div id="company-meta"></div>
+            </section>
+
+            <section class="dashboard-grid">
+                <div class="metrics-container">
+                    <div class="metric-card">
+                        <h3>📊 Precio Actual</h3>
+                        <p id="current-price" class="metric-value">--</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>📈 Rentabilidad Diaria Promedio</h3>
+                        <p id="avg-return" class="metric-value">--</p>
+                        <p id="confidence-interval" class="metric-subtext">Intervalo 95%: --</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>🎯 Días con Ganancia</h3>
+                        <p id="prob-gain" class="metric-value">--</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>⚠️ Volatilidad (Riesgo)</h3>
+                        <p id="volatility" class="metric-value">--</p>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Distribución de Precios (4 años)</h3>
+                    <div id="chart-container" class="chart-wrapper"></div>
+                </div>
+
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <h3>🔍 Prueba de Hipótesis</h3>
+                        <p id="hypothesis-test-result" class="stat-result">--</p>
+                        <p id="hypothesis-test-details" class="stat-details">p-valor: --</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>📐 Normalidad de Datos</h3>
+                        <p id="normality-test-result" class="stat-result">--</p>
+                        <p id="normality-test-details" class="stat-details">p-valor: --</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="probability-section" class="probability-container">
+                <h3>📉 Probabilidad de Rentabilidad Esperada</h3>
+                <div id="probability-result" class="probability-result">
+                    <p id="expected-probability" class="probability-value">--</p>
+                    <p id="probability-description">Ingresa una rentabilidad esperada y haz clic en "Calcular Probabilidad"</p>
+                </div>
+            </section>
+        </main>
+
+        
+    </div>
+    <footer>
+        <b><p>Proyecto de Estadística para Ingeniería - Datos de Yahoo Finance</p>
+        <p class="disclaimer">* Los resultados son análisis estadísticos con fines educativos.</p></b>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
